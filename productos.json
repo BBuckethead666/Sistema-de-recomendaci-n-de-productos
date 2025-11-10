@@ -1,14 +1,22 @@
 {
   "products" : {
-    "p1" : {
-      "id" : "p1",
-      "name" : "camiseta",
-      "price" : 60000.0,
+    "p2" : {
+      "id" : "p2",
+      "name" : "pantalon",
+      "price" : 100000.0,
       "category" : "ropa",
-      "brand" : "gucci"
+      "brand" : "levi[ s"
+    },
+    "p4" : {
+      "id" : "p4",
+      "name" : "camiseta",
+      "price" : 40000.0,
+      "category" : "ropa",
+      "brand" : "h&m"
     }
   },
   "adjacency" : {
-    "p1" : [ ]
+    "p2" : [ ],
+    "p4" : [ ]
   }
 }
