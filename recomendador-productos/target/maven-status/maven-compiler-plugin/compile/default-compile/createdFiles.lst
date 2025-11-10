@@ -1,0 +1,13 @@
+co\edu\prog3\algorithms\CategoryMetric.class
+co\edu\prog3\model\Product.class
+co\edu\prog3\persistence\ProductJsonDao.class
+co\edu\prog3\algorithms\Recommendation.class
+co\edu\prog3\model\Relation$Type.class
+co\edu\prog3\algorithms\Recommender.class
+co\edu\prog3\model\ProductGraph.class
+co\edu\prog3\ui\MainApp.class
+co\edu\prog3\model\Relation.class
+co\edu\prog3\algorithms\PriceMetric.class
+co\edu\prog3\ui\MainController.class
+co\edu\prog3\algorithms\ISimilarityMetric.class
+co\edu\prog3\algorithms\BrandMetric.class

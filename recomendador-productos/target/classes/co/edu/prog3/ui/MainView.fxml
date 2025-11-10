@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.prog3.ui.MainController">
+
+    <top>
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu fx:id="menuFile">
+                    <items>
+                        <MenuItem fx:id="menuSave" onAction="#handleSave"/>
+                        <MenuItem fx:id="menuExit" onAction="#handleExit"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="menuActions">
+                    <items>
+                        <MenuItem fx:id="menuAdd" onAction="#handleAddProduct"/>
+                        <MenuItem fx:id="menuEdit" onAction="#handleEditProduct"/>
+                        <MenuItem fx:id="menuDelete" onAction="#handleDeleteProduct"/>
+                        <MenuItem fx:id="menuLoad" onAction="#handleLoadProducts"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="menuLanguage">
+                    <items>
+                        <MenuItem fx:id="menuSpanish" onAction="#switchToSpanish"/>
+                        <MenuItem fx:id="menuEnglish" onAction="#switchToEnglish"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <TableView fx:id="productTable">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="colName" text="Nombre" prefWidth="150"/>
+                <TableColumn fx:id="colPrice" text="Precio" prefWidth="100"/>
+                <TableColumn fx:id="colCategory" text="Categoría" prefWidth="120"/>
+                <TableColumn fx:id="colBrand" text="Marca" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

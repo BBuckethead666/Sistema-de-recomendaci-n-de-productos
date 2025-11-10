@@ -1,0 +1,14 @@
+{
+  "products" : {
+    "p1" : {
+      "id" : "p1",
+      "name" : "camiseta",
+      "price" : 60000.0,
+      "category" : "ropa",
+      "brand" : "gucci"
+    }
+  },
+  "adjacency" : {
+    "p1" : [ ]
+  }
+}
