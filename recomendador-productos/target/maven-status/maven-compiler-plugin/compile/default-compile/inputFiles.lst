@@ -1,12 +1,14 @@
+C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\CategoryMetric.java
+C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\persistence\ProductJsonDao.java
+C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\model\Relation.java
+C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\ui\ProductFormController.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\PriceMetric.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\ISimilarityMetric.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\Recommender.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\Recommendation.java
+C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\ui\RecommendationsController.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\ui\MainController.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\ui\MainApp.java
-C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\CategoryMetric.java
-C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\persistence\ProductJsonDao.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\model\Product.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\model\ProductGraph.java
-C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\model\Relation.java
 C:\Users\USER\OneDrive\Documentos\prograIII\RecomendadorProductos\recomendador-productos\src\main\java\co\edu\prog3\algorithms\BrandMetric.java

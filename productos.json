@@ -1,22 +1,30 @@
 {
   "products" : {
-    "p2" : {
-      "id" : "p2",
-      "name" : "pantalon",
-      "price" : 100000.0,
-      "category" : "ropa",
-      "brand" : "levi[ s"
-    },
     "p4" : {
       "id" : "p4",
       "name" : "camiseta",
       "price" : 40000.0,
       "category" : "ropa",
       "brand" : "h&m"
+    },
+    "p5" : {
+      "id" : "p5",
+      "name" : "gorra",
+      "price" : 50000.0,
+      "category" : "ropa",
+      "brand" : "pou"
+    },
+    "p2" : {
+      "id" : "p2",
+      "name" : "pantalon",
+      "price" : 100000.0,
+      "category" : "ropa",
+      "brand" : "levi' s"
     }
   },
   "adjacency" : {
-    "p2" : [ ],
-    "p4" : [ ]
+    "p4" : [ ],
+    "p5" : [ ],
+    "p2" : [ ]
   }
 }
