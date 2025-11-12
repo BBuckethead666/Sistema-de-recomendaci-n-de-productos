@@ -45,7 +45,7 @@
     <!-- Panel lateral de filtros -->
     <left>
         <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #f4f4f4;">
-            <Label text="Filtros" style="-fx-font-weight: bold;"/>
+            <Label fx:id="lblFilters" text="%filter.title" style="-fx-font-weight: bold;"/>
             <TextField fx:id="txtSearch" promptText="Buscar por nombre"/>
             <ComboBox fx:id="cmbCategory" promptText="Categoría"/>
             <ComboBox fx:id="cmbBrand" promptText="Marca"/>

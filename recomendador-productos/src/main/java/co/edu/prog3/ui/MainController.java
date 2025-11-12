@@ -56,6 +56,7 @@ public class MainController {
 
     // ===== Estado inferior =====
     @FXML private Label lblStatus;
+    @FXML private Label lblFilters;
 
     // ===== Modelo =====
     private final ProductJsonDao dao = new ProductJsonDao();
@@ -279,7 +280,8 @@ public class MainController {
 
         // Estado inferior
         lblStatus.setText(bundle.getString("status.total") + graph.listProducts().size());
-
+        //titulo de filtros
+        lblFilters.setText(bundle.getString("filter.title"));
         // Título de la ventana
         Stage stage = (Stage) productTable.getScene().getWindow();
         stage.setTitle(bundle.getString("title"));
