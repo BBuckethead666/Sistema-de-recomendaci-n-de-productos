@@ -1,12 +1,5 @@
 {
   "products" : {
-    "p4" : {
-      "id" : "p4",
-      "name" : "camiseta",
-      "price" : 40000.0,
-      "category" : "ropa",
-      "brand" : "h&m"
-    },
     "p5" : {
       "id" : "p5",
       "name" : "gorra",
@@ -20,11 +13,18 @@
       "price" : 100000.0,
       "category" : "ropa",
       "brand" : "levi' s"
+    },
+    "p4" : {
+      "id" : "p4",
+      "name" : "camiseta",
+      "price" : 40000.0,
+      "category" : "ropa",
+      "brand" : "h&m"
     }
   },
   "adjacency" : {
-    "p4" : [ ],
     "p5" : [ ],
-    "p2" : [ ]
+    "p2" : [ ],
+    "p4" : [ ]
   }
 }
