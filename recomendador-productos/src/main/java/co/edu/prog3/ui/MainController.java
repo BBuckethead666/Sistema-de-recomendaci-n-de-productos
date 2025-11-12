@@ -45,7 +45,7 @@ public class MainController {
     @FXML private MenuItem menuEdit;
     @FXML private MenuItem menuDelete;
     @FXML private MenuItem menuLoad;
-
+    @FXML private Menu menuLanguage;
     // ===== Switch idioma =====
    
 
@@ -257,7 +257,7 @@ public class MainController {
         menuEdit.setText(bundle.getString("menu.edit"));
         menuDelete.setText(bundle.getString("menu.delete"));
         menuLoad.setText(bundle.getString("menu.load"));
-
+        menuLanguage.setText(bundle.getString("menu.language"));
     
 
         // Botones inferiores
