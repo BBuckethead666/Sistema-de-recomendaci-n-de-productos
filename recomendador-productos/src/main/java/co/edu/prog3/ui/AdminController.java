@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminController {
@@ -97,12 +99,13 @@ public class AdminController {
 
             refreshList();
             clearForm();
+            showInfo("alert.productAdded");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /** 🔑 Nuevo método para actualizar producto existente */
+    /** 🔑 Método para actualizar producto existente */
     @FXML
     private void updateProduct() {
         String selected = productList.getSelectionModel().getSelectedItem();
@@ -122,6 +125,7 @@ public class AdminController {
 
                     refreshList();
                     clearForm();
+                    showInfo("alert.productUpdated");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -133,16 +137,26 @@ public class AdminController {
     private void deleteProduct() {
         String selected = productList.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            String id = selected.split(" - ")[0];
-            graph.removeProduct(id);
-            try {
-                ProductJsonDao dao = new ProductJsonDao();
-                dao.save("productos_data.json", graph);
-            } catch (IOException e) {
-                e.printStackTrace();
+            ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle(bundle.getString("alert.confirmTitle"));
+            confirm.setHeaderText(null);
+            confirm.setContentText(bundle.getString("alert.confirmDelete"));
+            Optional<javafx.scene.control.ButtonType> result = confirm.showAndWait();
+
+            if (result.isPresent() && result.get() == javafx.scene.control.ButtonType.OK) {
+                String id = selected.split(" - ")[0];
+                graph.removeProduct(id);
+                try {
+                    ProductJsonDao dao = new ProductJsonDao();
+                    dao.save("productos_data.json", graph);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                refreshList();
+                clearForm();
+                showInfo("alert.productDeleted");
             }
-            refreshList();
-            clearForm();
         }
     }
 
@@ -183,5 +197,15 @@ public class AdminController {
         brandField.clear();
         imagePathField.clear();
         productList.getSelectionModel().clearSelection();
+    }
+
+    /** 🔑 Método auxiliar para mostrar notificaciones internacionalizadas */
+    private void showInfo(String key) {
+        ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(bundle.getString("alert.infoTitle"));
+        alert.setHeaderText(null);
+        alert.setContentText(bundle.getString(key));
+        alert.showAndWait();
     }
 }

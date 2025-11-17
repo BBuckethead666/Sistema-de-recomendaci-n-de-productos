@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
@@ -24,13 +25,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class StoreController {
 
     @FXML private GridPane catalogGrid;
     @FXML private ListView<String> cartList;
-    @FXML private Label totalLabel; // ✅ nuevo para mostrar el total
+    @FXML private Label totalLabel;
 
     private ProductGraph graph;
     private List<Product> carrito;
@@ -56,7 +58,7 @@ public class StoreController {
             graph = new ProductGraph();
         }
         loadCatalog();
-        updateTotal(); // inicializar total
+        updateTotal();
     }
 
     private void loadCatalog() {
@@ -141,81 +143,123 @@ public class StoreController {
     private void addToCart(Product product) {
         carrito.add(product);
         cartList.getItems().add(product.getName() + " - $" + product.getPrice());
-        updateTotal(); // ✅ actualizar total
+        updateTotal();
         try {
             CarritoJsonDao dao = new CarritoJsonDao();
             dao.save("carrito.json", carrito);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // ❌ No mostramos alerta aquí, solo se actualiza el carrito y el total
     }
 
     @FXML
     private void clearCart() {
-        carrito.clear();
-        cartList.getItems().clear();
-        updateTotal(); // ✅ resetear total
-        try {
-            CarritoJsonDao dao = new CarritoJsonDao();
-            dao.save("carrito.json", carrito);
-        } catch (IOException e) {
-            e.printStackTrace();
+        ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+
+        if (carrito.isEmpty()) {
+            showInfo(bundle.getString("alert.emptyCart"));
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle(bundle.getString("alert.confirmTitle"));
+        confirm.setHeaderText(null);
+        confirm.setContentText(bundle.getString("alert.confirmClear"));
+        Optional<javafx.scene.control.ButtonType> result = confirm.showAndWait();
+
+        if (result.isPresent() && result.get() == javafx.scene.control.ButtonType.OK) {
+            carrito.clear();
+            cartList.getItems().clear();
+            updateTotal();
+            try {
+                CarritoJsonDao dao = new CarritoJsonDao();
+                dao.save("carrito.json", carrito);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            showInfo(bundle.getString("alert.cleared"));
         }
     }
 
     private void updateTotal() {
-    ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
-    double total = carrito.stream().mapToDouble(Product::getPrice).sum();
-    totalLabel.setText(bundle.getString("label.total") + ": $" + total);
-}
-
+        ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+        double total = carrito.stream().mapToDouble(Product::getPrice).sum();
+        totalLabel.setText(bundle.getString("label.total") + ": $" + total);
+    }
 
     private void showProductDetails(Product product) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("Detalles del producto");
+        ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(bundle.getString("alert.productDetails"));
         alert.setHeaderText(product.getName());
         alert.setContentText(
-                "Precio: $" + product.getPrice() + "\n" +
-                "Categoría: " + product.getCategory() + "\n" +
-                "Marca: " + product.getBrand()
+                bundle.getString("label.price") + ": $" + product.getPrice() + "\n" +
+                bundle.getString("label.category") + ": " + product.getCategory() + "\n" +
+                bundle.getString("label.brand") + ": " + product.getBrand()
         );
         alert.showAndWait();
     }
 
     @FXML
     private void checkout() {
-        System.out.println("Checkout con " + carrito.size() + " productos. Total: $" +
-                carrito.stream().mapToDouble(Product::getPrice).sum());
-    }
-
-   @FXML
-private void goBack() {
-    try {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/prog3/ui/MainView.fxml"), bundle);
-        Parent root = loader.load();
 
-        MainController controller = loader.getController();
-        controller.setStage(stage);
-
-        boolean wasFullScreen = stage.isFullScreen();
-        boolean wasMaximized = stage.isMaximized();
-
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(root);
-            stage.setScene(scene);
+        if (carrito.isEmpty()) {
+            showInfo(bundle.getString("alert.checkoutEmpty"));
         } else {
-            scene.setRoot(root);
+            double total = carrito.stream().mapToDouble(Product::getPrice).sum();
+            String message = bundle.getString("alert.checkoutSuccess").replace("${0}", String.valueOf(total));
+            showInfo(message);
+            carrito.clear();
+            cartList.getItems().clear();
+            updateTotal();
+            try {
+                CarritoJsonDao dao = new CarritoJsonDao();
+                dao.save("carrito.json", carrito);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        stage.setTitle(bundle.getString("main.title"));
-        stage.setFullScreen(wasFullScreen);
-        stage.setMaximized(wasMaximized);
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 
+    @FXML
+    private void goBack() {
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/prog3/ui/MainView.fxml"), bundle);
+            Parent root = loader.load();
+
+            MainController controller = loader.getController();
+            controller.setStage(stage);
+
+            boolean wasFullScreen = stage.isFullScreen();
+            boolean wasMaximized = stage.isMaximized();
+
+            Scene scene = stage.getScene();
+            if (scene == null) {
+                scene = new Scene(root);
+                stage.setScene(scene);
+            } else {
+                scene.setRoot(root);
+            }
+
+            stage.setTitle(bundle.getString("main.title"));
+            stage.setFullScreen(wasFullScreen);
+            stage.setMaximized(wasMaximized);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+     /** 🔑 Método auxiliar para mostrar notificaciones internacionalizadas */
+    private void showInfo(String message) {
+        ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(bundle.getString("alert.infoTitle"));
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
