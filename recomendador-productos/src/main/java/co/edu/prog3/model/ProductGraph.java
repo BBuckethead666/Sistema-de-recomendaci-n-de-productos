@@ -1,56 +1,84 @@
 package co.edu.prog3.model;
 
-import java.util.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@JsonIgnoreProperties(ignoreUnknown = true) // ignora campos extra como "empty"
 public class ProductGraph {
-    private Map<String, Product> products = new HashMap<>();
-    private Map<String, Set<Relation>> adjacency = new HashMap<>();
 
-    // Constructor vacío requerido por Jackson
-    public ProductGraph() {}
+    private List<Product> products;
+    private int idCounter = 1;
+    private String idPrefix = "PRD"; // prefijo configurable
 
-    // Métodos CRUD
-    public void addProduct(Product p) {
-        products.put(p.getId(), p);
-        adjacency.putIfAbsent(p.getId(), new HashSet<>());
+    public ProductGraph() {
+        this.products = new ArrayList<>();
     }
 
-    public Product getProduct(String id) {
-        return products.get(id);
+    public List<Product> getProducts() { return products; }
+    public void setProducts(List<Product> products) { this.products = products; }
+
+    // -------------------- CRUD --------------------
+    public void addProduct(Product p) { products.add(p); }
+
+    public void updateProduct(Product updated) {
+        Optional<Product> existing = products.stream()
+                .filter(p -> p.getId().equals(updated.getId()))
+                .findFirst();
+        existing.ifPresent(p -> {
+            p.setName(updated.getName());
+            p.setPrice(updated.getPrice());
+            p.setCategory(updated.getCategory());
+            p.setBrand(updated.getBrand());
+            p.setImagePath(updated.getImagePath());
+        });
     }
 
-    public List<Product> listProducts() {
-        return new ArrayList<>(products.values());
+    public void removeProduct(String id) { products.removeIf(p -> p.getId().equals(id)); }
+
+    public Product findProductById(String id) {
+        return products.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
     }
 
-    public void addRelation(Relation r) {
-        adjacency.putIfAbsent(r.getFromId(), new HashSet<>());
-        adjacency.putIfAbsent(r.getToId(), new HashSet<>());
-        adjacency.get(r.getFromId()).add(r);
-        adjacency.get(r.getToId()).add(new Relation(r.getToId(), r.getFromId(), r.getType(), r.getWeight()));
+    public List<Product> listProducts() { return new ArrayList<>(products); }
+
+    // -------------------- Recommender --------------------
+    public Product getProduct(String id) { return findProductById(id); }
+
+    public List<Product> neighbors(String id) {
+        Product base = getProduct(id);
+        if (base == null) return new ArrayList<>();
+
+        return products.stream()
+                .filter(p -> !p.getId().equals(id))
+                .filter(p -> p.getCategory().equalsIgnoreCase(base.getCategory())
+                          || p.getBrand().equalsIgnoreCase(base.getBrand()))
+                .toList();
     }
 
-    public Set<Relation> neighbors(String id) {
-        return adjacency.getOrDefault(id, Set.of());
+    // -------------------- ID Generator --------------------
+    public String generateId() {
+        String newId;
+        do {
+            newId = idPrefix + String.format("%03d", idCounter++);
+        } while (findProductById(newId) != null);
+        return newId;
     }
 
-    public void removeProduct(String id) {
-        products.remove(id);
-        adjacency.remove(id);
-        for (Set<Relation> rels : adjacency.values()) {
-            rels.removeIf(r -> r.getToId().equals(id));
-        }
+    public void resetIdCounter() { idCounter = 1; }
+    public void setIdPrefix(String prefix) { this.idPrefix = prefix; }
+
+    // -------------------- Utilidades --------------------
+    @JsonIgnore
+    public boolean isEmpty() { return products.isEmpty(); }
+
+    public int size() { return products.size(); }
+
+    public void clear() {
+        products.clear();
+        resetIdCounter();
     }
-
-    public void removeRelation(String fromId, String toId, Relation.Type type) {
-        adjacency.getOrDefault(fromId, Set.of()).removeIf(r -> r.getToId().equals(toId) && r.getType() == type);
-        adjacency.getOrDefault(toId, Set.of()).removeIf(r -> r.getToId().equals(fromId) && r.getType() == type);
-    }
-
-    // Getters y setters para Jackson
-    public Map<String, Product> getProducts() { return products; }
-    public void setProducts(Map<String, Product> products) { this.products = products; }
-
-    public Map<String, Set<Relation>> getAdjacency() { return adjacency; }
-    public void setAdjacency(Map<String, Set<Relation>> adjacency) { this.adjacency = adjacency; }
 }

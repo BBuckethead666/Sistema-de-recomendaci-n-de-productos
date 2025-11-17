@@ -1,56 +1,44 @@
 package co.edu.prog3.model;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-
-class ProductGraphTest {
-
-    private ProductGraph graph;
-
-    @BeforeEach
-    void setup() {
-        graph = new ProductGraph();
-    }
+public class ProductGraphTest {
 
     @Test
-    void addAndGetProduct() {
-        Product p = new Product("P1", "Camiseta", 50000, "Ropa", "MarcaA");
+    public void testAddAndFindProduct() {
+        ProductGraph graph = new ProductGraph();
+        Product p = new Product("P001", "Laptop", 1200.0, "Electrónica", "Lenovo", "images/laptop.png");
+
         graph.addProduct(p);
-        Product found = graph.getProduct("P1");
-        assertNotNull(found);
-        assertEquals("Camiseta", found.getName());
+
+        assertEquals(1, graph.size());
+        assertNotNull(graph.findProductById("P001"));
+        assertEquals("Laptop", graph.findProductById("P001").getName());
     }
 
     @Test
-    void addAndListProducts() {
-        graph.addProduct(new Product("P1", "A", 10, "C", "B"));
-        graph.addProduct(new Product("P2", "B", 20, "C2", "B2"));
-        final List<Product> all = graph.listProducts();
-        assertEquals(2, all.size());
+    public void testUpdateProduct() {
+        ProductGraph graph = new ProductGraph();
+        Product p = new Product("P001", "Laptop", 1200.0, "Electrónica", "Lenovo", "images/laptop.png");
+        graph.addProduct(p);
+
+        Product updated = new Product("P001", "Laptop Pro", 1500.0, "Electrónica", "Lenovo", "images/laptop.png");
+        graph.updateProduct(updated);
+
+        assertEquals("Laptop Pro", graph.findProductById("P001").getName());
+        assertEquals(1500.0, graph.findProductById("P001").getPrice());
     }
 
     @Test
-    void removeProductAlsoRemovesRelations() {
-        Product p1 = new Product("P1", "A", 10, "C", "B");
-        Product p2 = new Product("P2", "B", 20, "C2", "B2");
-        graph.addProduct(p1);
-        graph.addProduct(p2);
-        graph.addRelation(new Relation("P1", "P2", Relation.Type.CATEGORY, 1.0));
-        assertFalse(graph.neighbors("P1").isEmpty(), "P1 debe tener relaciones antes de eliminar P2");
-        graph.removeProduct("P2");
-        assertTrue(graph.neighbors("P1").isEmpty(), "Relaciones hacia P2 deben eliminarse");
-        assertNull(graph.getProduct("P2"));
-    }
+    public void testRemoveProduct() {
+        ProductGraph graph = new ProductGraph();
+        Product p = new Product("P001", "Laptop", 1200.0, "Electrónica", "Lenovo", "images/laptop.png");
+        graph.addProduct(p);
 
-    @Test
-    void addAndRemoveRelation() {
-        graph.addProduct(new Product("P1","A",0,"x","y"));
-        graph.addProduct(new Product("P2","B",0,"x","y"));
-        graph.addRelation(new Relation("P1","P2", Relation.Type.BRAND, 0.8));
-        assertEquals(1, graph.neighbors("P1").size());
-        graph.removeRelation("P1","P2", Relation.Type.BRAND);
-        assertEquals(0, graph.neighbors("P1").size());
+        graph.removeProduct("P001");
+
+        assertTrue(graph.isEmpty());
     }
 }

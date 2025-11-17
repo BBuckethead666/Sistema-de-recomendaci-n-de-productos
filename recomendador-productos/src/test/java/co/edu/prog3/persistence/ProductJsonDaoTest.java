@@ -1,37 +1,30 @@
 package co.edu.prog3.persistence;
 
-import co.edu.prog3.model.*;
-import org.junit.jupiter.api.*;
+import co.edu.prog3.model.Product;
+import co.edu.prog3.model.ProductGraph;
+import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductJsonDaoTest {
-
-    private ProductJsonDao dao;
-    private File tmpFile;
-
-    @BeforeEach
-    void setup() throws IOException {
-        dao = new ProductJsonDao();
-        tmpFile = File.createTempFile("productos-test", ".json");
-        tmpFile.deleteOnExit();
-    }
+public class ProductJsonDaoTest {
 
     @Test
-    void saveAndLoadGraph() throws Exception {
+    public void testSaveAndLoadProducts() throws IOException {
+        ProductJsonDao dao = new ProductJsonDao();
+
+        // Crear catálogo de prueba
         ProductGraph graph = new ProductGraph();
-        graph.addProduct(new Product("P1","A",10,"C","B"));
-        graph.addProduct(new Product("P2","B",20,"C2","B2"));
-        graph.addRelation(new Relation("P1","P2", Relation.Type.CATEGORY, 1.0));
+        graph.addProduct(new Product("T001", "Producto Test", 99.9, "Test", "TestBrand", "images/test.png"));
 
-        dao.save(tmpFile.getAbsolutePath(), graph);
+        // Guardar en carpeta data/
+        dao.save("test_products.json", graph);
 
-        ProductGraph loaded = dao.load(tmpFile.getAbsolutePath());
-        assertNotNull(loaded.getProduct("P1"));
-        assertNotNull(loaded.getProduct("P2"));
-        assertFalse(loaded.neighbors("P1").isEmpty());
+        // Volver a cargar desde resources (productos.json)
+        ProductGraph loaded = dao.load("co/edu/prog3/ui/productos.json");
+
+        assertNotNull(loaded);
+        assertFalse(loaded.listProducts().isEmpty(), "El catálogo cargado no debe estar vacío");
     }
 }

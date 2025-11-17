@@ -1,0 +1,165 @@
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f4f4f9;
+}
+
+/* ====== Encabezado ====== */
+.header {
+    -fx-background-color: linear-gradient(to right, #0078d7, #00aaff);
+    -fx-padding: 12;
+}
+.header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* ====== Barra de herramientas ====== */
+.tool-bar {
+    -fx-background-color: #0078d7;
+}
+.tool-bar .button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #0078d7;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+}
+.tool-bar .button:hover {
+    -fx-background-color: #eef6ff;
+}
+
+/* ====== Tarjeta de producto ====== */
+.product-card {
+    -fx-border-color: #ccc;
+    -fx-border-radius: 8;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-padding: 14;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0, 2, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    -fx-background-color: #eef6ff;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* Imagen dentro de la tarjeta */
+.product-card .image-view {
+    -fx-border-color: #ddd;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* Nombre del producto */
+.product-card .label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+/* Precio destacado */
+.price-label {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 10;
+    -fx-background-radius: 6;
+}
+
+/* Botón general */
+.button {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 14;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #005a9e;
+}
+
+/* Botón de acción especial */
+.button-clear {
+    -fx-background-color: #ff4d4d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+.button-clear:hover {
+    -fx-background-color: #cc0000;
+}
+
+.button-checkout {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+.button-checkout:hover {
+    -fx-background-color: #1e7e34;
+}
+
+/* ====== Bloque de recomendaciones ====== */
+.recommendations {
+    -fx-background-color: #f0f8ff;
+    -fx-border-color: #cce;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8;
+    -fx-spacing: 8;
+    -fx-alignment: top-left;
+}
+
+.recommendations .label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.recommendations .button {
+    -fx-font-size: 12px;
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 4 10;
+}
+
+.recommendations .button:hover {
+    -fx-background-color: #005a9e;
+}
+
+/* ====== Carrito ====== */
+.list-view {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.list-view .list-cell {
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+}
+
+/* ====== Etiquetas generales ====== */
+.label {
+    -fx-text-fill: #222;
+}
+
+/* ====== Total del carrito ====== */
+.total-label {
+    -fx-background-color: #eef6ff;
+    -fx-text-fill: #0078d7;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 10;
+    -fx-background-radius: 6;
+}

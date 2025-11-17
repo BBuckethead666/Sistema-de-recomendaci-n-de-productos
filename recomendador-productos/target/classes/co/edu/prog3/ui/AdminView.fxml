@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.prog3.ui.AdminController"
+            stylesheets="@styles.css">
+
+    <!-- Barra superior -->
+    <top>
+        <ToolBar styleClass="tool-bar">
+            <Button text="%button.back" onAction="#goBack"/>
+        </ToolBar>
+    </top>
+
+    <!-- Centro: lista de productos -->
+    <center>
+        <ListView fx:id="productList"/>
+    </center>
+
+    <!-- Lado derecho: formulario -->
+    <right>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label text="%label.newProduct"/>
+            <TextField fx:id="nameField" promptText="%prompt.name"/>
+            <TextField fx:id="priceField" promptText="%prompt.price"/>
+            <TextField fx:id="categoryField" promptText="%prompt.category"/>
+            <TextField fx:id="brandField" promptText="%prompt.brand"/>
+            <TextField fx:id="imagePathField" promptText="%prompt.image"/>
+
+            <!-- Botones de acción -->
+            <HBox spacing="8">
+                <Button text="%button.add" onAction="#addProduct" styleClass="button-checkout"/>
+                <Button text="%button.update" onAction="#updateProduct"/>
+                <Button text="%button.delete" onAction="#deleteProduct" styleClass="button-clear"/>
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>

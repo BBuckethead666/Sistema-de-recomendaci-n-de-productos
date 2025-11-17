@@ -8,16 +8,21 @@
     <artifactId>product-recommender</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <!-- Versión de Java -->
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javafx.version>21</javafx.version>
-        <junit.version>5.10.0</junit.version>
-    </properties>
+ <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javafx.version>17.0.11</javafx.version> <!-- versión estable de JavaFX 17 -->
+    <junit.version>5.10.0</junit.version>
+</properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafx.version}</version>
+            <classifier>win</classifier> <!-- importante: usa win, mac o linux según tu SO -->
+        </dependency>
         <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -59,14 +64,14 @@
             </plugin>
 
             <!-- Plugin JavaFX -->
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                <configuration>
-                    <mainClass>co.edu.prog3.ui.MainApp</mainClass>
-                </configuration>
-            </plugin>
+    <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <configuration>
+        <mainClass>co.edu.prog3.MainApp</mainClass>
+        </configuration>
+    </plugin>
 
             <!-- Plugin Surefire para JUnit 5 -->
             <plugin>

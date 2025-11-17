@@ -1,0 +1,1 @@
+[{"id":"P001","name":"Laptop","price":1200.0,"category":"Electronics","brand":"Dell","imagePath":"images/laptop.png"},{"id":"P002","name":"Mouse","price":25.0,"category":"Electronics","brand":"Logitech","imagePath":"images/mouse.png"},{"id":"P003","name":"Shoes","price":50.0,"category":"Fashion","brand":"Nike","imagePath":"images/shoes.png"}]

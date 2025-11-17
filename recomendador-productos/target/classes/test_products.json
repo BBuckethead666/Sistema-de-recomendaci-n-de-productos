@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "id": "P001",
+      "name": "Laptop",
+      "price": 1200.0,
+      "category": "Electrónica",
+      "brand": "Lenovo",
+      "imagePath": "images/laptop.png"
+    },
+    {
+      "id": "P002",
+      "name": "Teléfono",
+      "price": 800.0,
+      "category": "Electrónica",
+      "brand": "Samsung",
+      "imagePath": "images/phone.png"
+    }
+  ]
+}

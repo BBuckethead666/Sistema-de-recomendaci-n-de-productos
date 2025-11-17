@@ -1,81 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.edu.prog3.ui.MainController">
+            fx:controller="co.edu.prog3.ui.MainController"
+            stylesheets="@styles.css">
 
-    <!-- Barra de menús superior + switch idioma -->
- <top>
-        <HBox spacing="20" style="-fx-padding: 10; -fx-background-color: #ffffff;" alignment="CENTER_LEFT">
-            <MenuBar fx:id="menuBar">
-                <menus>
-                    <Menu fx:id="menuFile" text="%menu.file">
-                        <items>
-                            <MenuItem fx:id="menuSave" text="%menu.save" onAction="#handleSave"/>
-                            <MenuItem fx:id="menuExit" text="%menu.exit" onAction="#handleExit"/>
-                        </items>
-                    </Menu>
-                    <Menu fx:id="menuActions" text="%menu.actions">
-                        <items>
-                            <MenuItem fx:id="menuAdd" text="%menu.add" onAction="#handleAddProduct"/>
-                            <MenuItem fx:id="menuEdit" text="%menu.edit" onAction="#handleEditProduct"/>
-                            <MenuItem fx:id="menuDelete" text="%menu.delete" onAction="#handleDeleteProduct"/>
-                            <MenuItem fx:id="menuLoad" text="%menu.load" onAction="#handleLoadProducts"/>
-                        </items>
-                    </Menu>
-                </menus>
-                <Menu fx:id="menuLanguage" text="%menu.language">
-                    <items>
-                        <MenuItem fx:id="menuSpanish" text="Español" onAction="#switchToSpanish"/>
-                        <MenuItem fx:id="menuEnglish" text="English" onAction="#switchToEnglish"/>
-                    </items>
-                </Menu>
-
-            </MenuBar>
-            <!-- Switch moderno para idioma -->
-            
-        </HBox>
+    <!-- Barra superior con selección de idioma -->
+    <top>
+        <ToolBar styleClass="tool-bar">
+            <Label text="%main.title" styleClass="header"/>
+            <Button text="%button.spanish" onAction="#setSpanish"/>
+            <Button text="%button.english" onAction="#setEnglish"/>
+        </ToolBar>
     </top>
 
-    <!-- Panel lateral de filtros -->
-    <left>
-        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #f4f4f4;">
-            <Label fx:id="lblFilters" text="%filter.title" style="-fx-font-weight: bold;"/>
-            <TextField fx:id="txtSearch" promptText="Buscar por nombre"/>
-            <ComboBox fx:id="cmbCategory" promptText="Categoría"/>
-            <ComboBox fx:id="cmbBrand" promptText="Marca"/>
-          <Button fx:id="btnApplyFilters" text="Aplicar filtros" onAction="#handleApplyFilters"/>
-
-            
-        </VBox>
-    </left>
-
-    <!-- Tabla en el centro -->
+    <!-- Centro: botones de navegación -->
     <center>
-        <TableView fx:id="productTable">
-            <columns>
-                <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
-                <TableColumn fx:id="colName" text="Nombre" prefWidth="150"/>
-                <TableColumn fx:id="colPrice" text="Precio" prefWidth="100"/>
-                <TableColumn fx:id="colCategory" text="Categoría" prefWidth="120"/>
-                <TableColumn fx:id="colBrand" text="Marca" prefWidth="120"/>
-            </columns>
-        </TableView>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
+            <Button text="%button.store" onAction="#openStoreView" prefWidth="200"/>
+            <Button text="%button.admin" onAction="#openAdminView" prefWidth="200"/>
+        </VBox>
     </center>
-
-    <!-- Botones inferiores + estado -->
-    <bottom>
-        <HBox spacing="20" alignment="CENTER" style="-fx-padding: 15;">
-            <Button fx:id="btnAdd" text="Añadir Producto" onAction="#handleAddProduct"/>
-            <Button fx:id="btnEdit" text="Editar Producto" onAction="#handleEditProduct"/>
-            <Button fx:id="btnRecommend" text="Buscar Recomendaciones" onAction="#handleRecommend"/>
-            <Label fx:id="lblStatus" text="Total productos: 0"/>
-        </HBox>
-    </bottom>
-
 </BorderPane>

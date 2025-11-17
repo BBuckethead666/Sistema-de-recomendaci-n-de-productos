@@ -2,31 +2,38 @@
 
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 
 <GridPane xmlns="http://javafx.com/javafx/21"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="co.edu.prog3.ui.ProductFormController"
-          hgap="10" vgap="10" style="-fx-padding: 15;">
+          hgap="10" vgap="10" style="-fx-padding: 20;">
 
-    <!-- Etiquetas y campos -->
-    <Label fx:id="lblId" text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Label text="%form.id" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <TextField fx:id="txtId" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-    <Label fx:id="lblName" text="Nombre" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Label text="%form.name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
     <TextField fx:id="txtName" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-    <Label fx:id="lblPrice" text="Precio" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Label text="%form.price" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
     <TextField fx:id="txtPrice" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-    <Label fx:id="lblCategory" text="Categoría" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Label text="%form.category" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
     <TextField fx:id="txtCategory" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-    <Label fx:id="lblBrand" text="Marca" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Label text="%form.brand" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
     <TextField fx:id="txtBrand" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
+    <!-- Campo para imagen -->
+    <Label text="%form.image" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <Button fx:id="btnSelectImage" text="%form.selectImage" 
+            onAction="#handleSelectImage" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <ImageView fx:id="imgPreview" fitHeight="100" fitWidth="100" 
+               preserveRatio="true" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
     <!-- Botones -->
-    <Button fx:id="btnSave" text="Guardar" onAction="#handleSave"
-            GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-    <Button fx:id="btnCancel" text="Cancelar" onAction="#handleCancel"
-            GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Button fx:id="btnSave" text="%form.save" onAction="#handleSave" 
+            GridPane.rowIndex="7" GridPane.columnIndex="0" styleClass="button-checkout"/>
+    <Button fx:id="btnCancel" text="%form.cancel" onAction="#handleCancel" 
+            GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="button-clear"/>
 </GridPane>

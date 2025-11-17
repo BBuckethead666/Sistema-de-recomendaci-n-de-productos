@@ -1,0 +1,59 @@
+{
+  "products" : [ {
+    "id" : "PRD001",
+    "name" : "Laptop Lenovo IdeaPad 3",
+    "price" : 2200000.0,
+    "category" : "Computadores",
+    "brand" : "Lenovo",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD002",
+    "name" : "Laptop Lenovo ThinkPad X1",
+    "price" : 3500000.0,
+    "category" : "Computadores",
+    "brand" : "Lenovo",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD003",
+    "name" : "Smartphone Samsung Galaxy A54",
+    "price" : 1800000.0,
+    "category" : "Celulares",
+    "brand" : "Samsung",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD004",
+    "name" : "Smartphone Samsung Galaxy S23",
+    "price" : 4200000.0,
+    "category" : "Celulares",
+    "brand" : "Samsung",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD005",
+    "name" : "Audífonos JBL Tune 510BT",
+    "price" : 350000.0,
+    "category" : "Audio",
+    "brand" : "JBL",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD006",
+    "name" : "Audífonos JBL Live 660NC",
+    "price" : 550000.0,
+    "category" : "Audio",
+    "brand" : "JBL",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD007",
+    "name" : "Tablet Apple iPad 10th Gen",
+    "price" : 2800000.0,
+    "category" : "Tablets",
+    "brand" : "Apple",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "PRD008",
+    "name" : "Tablet Apple iPad Pro",
+    "price" : 5200000.0,
+    "category" : "Tablets",
+    "brand" : "Apple",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  } ]
+}

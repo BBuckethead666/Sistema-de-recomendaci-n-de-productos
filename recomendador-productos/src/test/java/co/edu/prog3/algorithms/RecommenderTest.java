@@ -1,64 +1,38 @@
 package co.edu.prog3.algorithms;
 
-import co.edu.prog3.model.*;
-import org.junit.jupiter.api.*;
+import co.edu.prog3.model.Product;
+import co.edu.prog3.model.ProductGraph;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RecommenderTest {
-
-    private ProductGraph graph;
-    private Recommender recommender;
-
-    @BeforeEach
-    void setup() {
-        graph = new ProductGraph();
-        graph.addProduct(new Product("P1","A",100,"Ropa","M1"));
-        graph.addProduct(new Product("P2","B",110,"Ropa","M1"));
-        graph.addProduct(new Product("P3","C",300,"Calzado","M2"));
-        graph.addProduct(new Product("P4","D",105,"Ropa","M3"));
-
-        graph.addRelation(new Relation("P1","P2", Relation.Type.CATEGORY, 1.0));
-        graph.addRelation(new Relation("P2","P3", Relation.Type.BRAND, 0.4));
-        graph.addRelation(new Relation("P1","P4", Relation.Type.CATEGORY, 0.9));
-
-        recommender = new Recommender(graph);
-        recommender.addMetric(new CategoryMetric(), 0.5);
-        recommender.addMetric(new BrandMetric(), 0.3);
-        recommender.addMetric(new PriceMetric(), 0.2);
-    }
+public class RecommenderTest {
 
     @Test
-    void collectCandidatesBfsDepth1() {
-        var recs = recommender.recommendRanked("P1", 1, 10);
-        List<String> ids = recs.stream().map(r -> r.getProduct().getId()).toList();
-        assertTrue(ids.contains("P2"));
-        assertTrue(ids.contains("P4"));
-        assertFalse(ids.contains("P3"), "Profundidad 1 no debe incluir P3");
-    }
+    public void testRecommendByCategoryOrBrand() {
+        ProductGraph graph = new ProductGraph();
 
-    @Test
-    void bfsDepth2IncludesIndirect() {
-        var recs = recommender.recommendRanked("P1", 2, 10);
-        List<String> ids = recs.stream().map(r -> r.getProduct().getId()).toList();
-        assertTrue(ids.contains("P3"), "Profundidad 2 debe incluir P3");
-    }
+        Product p1 = new Product("P001", "Laptop", 1200.0, "Electrónica", "Lenovo", "images/laptop.png");
+        Product p2 = new Product("P002", "Teléfono", 800.0, "Electrónica", "Samsung", "images/phone.png");
+        Product p3 = new Product("P003", "Zapatos", 100.0, "Moda", "Nike", "images/shoes.png");
+        Product p4 = new Product("P004", "Monitor", 300.0, "Electrónica", "Lenovo", "images/monitor.png");
 
-    @Test
-    void rankingOrdersByScore() {
-        var recs = recommender.recommendRanked("P1", 2, 10);
-        assertFalse(recs.isEmpty());
-        for (int i = 1; i < recs.size(); i++) {
-            assertTrue(recs.get(i-1).getScore() >= recs.get(i).getScore(),
-                       "Scores deben estar ordenados descendentemente");
-        }
-    }
+        graph.addProduct(p1);
+        graph.addProduct(p2);
+        graph.addProduct(p3);
+        graph.addProduct(p4);
 
-    @Test
-    void topKLimitsResults() {
-        var recs = recommender.recommendRanked("P1", 2, 1);
-        assertTrue(recs.size() <= 1);
+        // Obtener recomendaciones para P001
+        List<Product> neighbors = graph.neighbors("P001");
+
+        // Validaciones
+        assertTrue(neighbors.stream().anyMatch(p -> p.getId().equals("P002")),
+                "Debe recomendar productos de la misma categoría (Electrónica)");
+        assertTrue(neighbors.stream().anyMatch(p -> p.getId().equals("P004")),
+                "Debe recomendar productos de la misma marca (Lenovo)");
+        assertFalse(neighbors.stream().anyMatch(p -> p.getId().equals("P003")),
+                "No debe recomendar productos de otra categoría/brand");
     }
 }

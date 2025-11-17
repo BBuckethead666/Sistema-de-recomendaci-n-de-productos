@@ -5,30 +5,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
-/**
- * DAO para persistencia de ProductGraph en JSON.
- */
 public class ProductJsonDao {
+
     private final ObjectMapper mapper = new ObjectMapper();
 
-    /**
-     * Guarda el grafo en un archivo JSON.
-     * @param filename ruta del archivo destino
-     * @param graph grafo de productos
-     * @throws IOException si ocurre un error de escritura
-     */
-    public void save(String filename, ProductGraph graph) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filename), graph);
+    // ✅ Cargar desde archivo externo o desde resources
+    public ProductGraph load(String path) throws IOException {
+        File file = new File(path);
+        if (file.exists()) {
+            return mapper.readValue(file, ProductGraph.class);
+        } else {
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream(path)) {
+                if (is == null) throw new IOException("No se encontró el recurso: " + path);
+                return mapper.readValue(is, ProductGraph.class);
+            }
+        }
     }
 
-    /**
-     * Carga un grafo desde un archivo JSON.
-     * @param filename ruta del archivo origen
-     * @return grafo cargado
-     * @throws IOException si ocurre un error de lectura
-     */
-    public ProductGraph load(String filename) throws IOException {
-        return mapper.readValue(new File(filename), ProductGraph.class);
+    // ✅ Guardar en archivo externo
+    public void save(String path, ProductGraph graph) throws IOException {
+        File file = new File(path);
+        mapper.writerWithDefaultPrettyPrinter().writeValue(file, graph);
     }
 }

@@ -1,3 +1,5 @@
-co\edu\prog3\algorithms\RecommenderTest.class
+co\edu\prog3\persistence\CarritoJsonDaoTest.class
 co\edu\prog3\model\ProductGraphTest.class
 co\edu\prog3\persistence\ProductJsonDaoTest.class
+co\edu\prog3\integration\IntegrationTest.class
+co\edu\prog3\algorithms\RecommenderTest.class
