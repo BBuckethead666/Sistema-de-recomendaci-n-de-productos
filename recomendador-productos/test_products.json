@@ -1,1 +1,10 @@
-[{"id":"P001","name":"Laptop","price":1200.0,"category":"Electronics","brand":"Dell","imagePath":"images/laptop.png"},{"id":"P002","name":"Mouse","price":25.0,"category":"Electronics","brand":"Logitech","imagePath":"images/mouse.png"}]
+{
+  "products" : [ {
+    "id" : "T001",
+    "name" : "Producto Test",
+    "price" : 99.9,
+    "category" : "Test",
+    "brand" : "TestBrand",
+    "imagePath" : "images/test.png"
+  } ]
+}
