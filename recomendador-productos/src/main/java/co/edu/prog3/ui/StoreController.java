@@ -83,7 +83,6 @@ public class StoreController {
         imageView.setFitHeight(120);
         imageView.setPreserveRatio(true);
 
-        // Manejo robusto de imágenes
         try {
             if (product.getImagePath() != null && !product.getImagePath().isBlank()) {
                 URL resource = getClass().getResource(product.getImagePath());
@@ -112,7 +111,6 @@ public class StoreController {
 
         box.getChildren().addAll(imageView, nameLabel, priceLabel, addButton);
 
-        // ✅ Recomendaciones interactivas
         List<Product> recomendados = graph.neighbors(product.getId());
         if (!recomendados.isEmpty()) {
             Label recLabel = new Label(bundle.getString("label.recommended"));
@@ -150,7 +148,6 @@ public class StoreController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // ❌ No mostramos alerta aquí, solo se actualiza el carrito y el total
     }
 
     @FXML

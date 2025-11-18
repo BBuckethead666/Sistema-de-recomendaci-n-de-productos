@@ -48,6 +48,7 @@ public class ProductGraph {
     // -------------------- Recommender --------------------
     public Product getProduct(String id) { return findProductById(id); }
 
+    /** 🔑 Recomendaciones mixtas: por marca o categoría */
     public List<Product> neighbors(String id) {
         Product base = getProduct(id);
         if (base == null) return new ArrayList<>();
@@ -56,6 +57,28 @@ public class ProductGraph {
                 .filter(p -> !p.getId().equals(id))
                 .filter(p -> p.getCategory().equalsIgnoreCase(base.getCategory())
                           || p.getBrand().equalsIgnoreCase(base.getBrand()))
+                .toList();
+    }
+
+    /** 🔑 Recomendaciones solo por marca */
+    public List<Product> neighborsByBrand(String id) {
+        Product base = getProduct(id);
+        if (base == null) return new ArrayList<>();
+
+        return products.stream()
+                .filter(p -> !p.getId().equals(id))
+                .filter(p -> p.getBrand().equalsIgnoreCase(base.getBrand()))
+                .toList();
+    }
+
+    /** 🔑 Recomendaciones solo por categoría */
+    public List<Product> neighborsByCategory(String id) {
+        Product base = getProduct(id);
+        if (base == null) return new ArrayList<>();
+
+        return products.stream()
+                .filter(p -> !p.getId().equals(id))
+                .filter(p -> p.getCategory().equalsIgnoreCase(base.getCategory()))
                 .toList();
     }
 

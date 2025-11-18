@@ -52,7 +52,6 @@ public class AdminController {
         }
         refreshList();
 
-        // 🔑 Listener para cargar datos al seleccionar
         productList.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 String id = selected.split(" - ")[0];
@@ -68,7 +67,6 @@ public class AdminController {
         });
     }
 
-    /** Refresca la lista de productos en el ListView */
     private void refreshList() {
         if (productList == null || graph == null) return;
         productList.getItems().clear();
@@ -85,13 +83,14 @@ public class AdminController {
     private void addProduct() {
         try {
             String id = graph.generateId();
-            String name = nameField.getText();
-            double price = Double.parseDouble(priceField.getText());
-            String category = categoryField.getText();
-            String brand = brandField.getText();
-            String imagePath = imagePathField.getText().isEmpty() ? "images/placeholder.png" : imagePathField.getText();
-
-            Product newProduct = new Product(id, name, price, category, brand, imagePath);
+            Product newProduct = new Product(
+                id,
+                nameField.getText(),
+                Double.parseDouble(priceField.getText()),
+                categoryField.getText(),
+                brandField.getText(),
+                imagePathField.getText().isEmpty() ? "images/placeholder.png" : imagePathField.getText()
+            );
             graph.addProduct(newProduct);
 
             ProductJsonDao dao = new ProductJsonDao();
@@ -105,7 +104,6 @@ public class AdminController {
         }
     }
 
-    /** 🔑 Método para actualizar producto existente */
     @FXML
     private void updateProduct() {
         String selected = productList.getSelectionModel().getSelectedItem();
@@ -199,7 +197,6 @@ public class AdminController {
         productList.getSelectionModel().clearSelection();
     }
 
-    /** 🔑 Método auxiliar para mostrar notificaciones internacionalizadas */
     private void showInfo(String key) {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
