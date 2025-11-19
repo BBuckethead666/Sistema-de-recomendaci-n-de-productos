@@ -5,62 +5,55 @@
     "price" : 2200000.0,
     "category" : "Computadores",
     "brand" : "Lenovo",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\lenovoideapad3.jpg"
   }, {
     "id" : "PRD002",
     "name" : "Laptop Lenovo ThinkPad X1",
     "price" : 3500000.0,
     "category" : "Computadores",
     "brand" : "Lenovo",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\lenovothinkpadx1.jpg"
   }, {
     "id" : "PRD003",
     "name" : "Smartphone Samsung Galaxy A54",
     "price" : 1800000.0,
     "category" : "Celulares",
     "brand" : "Samsung",
-    "imagePath" : "E:\\DANY UNIVERSIDAD\\Trabajos\\UPTC\\Java\\Sistema-de-recomendaci-n-de-productos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\Captura de pantalla 2025-11-06 101252.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\samsunggalaxiA54.jpg"
   }, {
     "id" : "PRD004",
     "name" : "Smartphone Samsung Galaxy S23",
     "price" : 4200000.0,
     "category" : "Celulares",
     "brand" : "Samsung",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\SamsumgS23.jpg"
   }, {
     "id" : "PRD005",
     "name" : "Audífonos JBL Tune 510BT",
     "price" : 350000.0,
     "category" : "Audio",
     "brand" : "JBL",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\jbl510.jpg"
   }, {
     "id" : "PRD006",
     "name" : "Audífonos JBL Live 660NC",
     "price" : 550000.0,
     "category" : "Audio",
     "brand" : "JBL",
-    "imagePath" : "E:\\DANY UNIVERSIDAD\\Trabajos\\UPTC\\Java\\Sistema-de-recomendaci-n-de-productos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\Captura de pantalla 2025-11-06 101136.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\jbl660.jpg"
   }, {
     "id" : "PRD007",
     "name" : "Tablet Apple iPad 10th Gen",
     "price" : 2800000.0,
     "category" : "Tablets",
     "brand" : "Apple",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\ipad10th.jpg"
   }, {
     "id" : "PRD008",
     "name" : "Tablet Apple iPad Pro",
     "price" : 5200000.0,
     "category" : "Tablets",
     "brand" : "Apple",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
-  }, {
-    "id" : "ITEM001",
-    "name" : "Smartphone Samsung Galaxy S23",
-    "price" : 4200000.0,
-    "category" : "Celulares",
-    "brand" : "Samsung",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "C:\\Users\\USER\\OneDrive\\Documentos\\prograIII\\RecomendadorProductos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\ipadpro.jpg"
   } ]
 }
