@@ -19,7 +19,7 @@
     "price" : 1800000.0,
     "category" : "Celulares",
     "brand" : "Samsung",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "E:\\DANY UNIVERSIDAD\\Trabajos\\UPTC\\Java\\Sistema-de-recomendaci-n-de-productos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\Captura de pantalla 2025-11-06 101252.png"
   }, {
     "id" : "PRD004",
     "name" : "Smartphone Samsung Galaxy S23",
@@ -40,7 +40,7 @@
     "price" : 550000.0,
     "category" : "Audio",
     "brand" : "JBL",
-    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+    "imagePath" : "E:\\DANY UNIVERSIDAD\\Trabajos\\UPTC\\Java\\Sistema-de-recomendaci-n-de-productos\\recomendador-productos\\src\\main\\resources\\co\\edu\\prog3\\ui\\images\\Captura de pantalla 2025-11-06 101136.png"
   }, {
     "id" : "PRD007",
     "name" : "Tablet Apple iPad 10th Gen",
@@ -54,6 +54,13 @@
     "price" : 5200000.0,
     "category" : "Tablets",
     "brand" : "Apple",
+    "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
+  }, {
+    "id" : "ITEM001",
+    "name" : "Smartphone Samsung Galaxy S23",
+    "price" : 4200000.0,
+    "category" : "Celulares",
+    "brand" : "Samsung",
     "imagePath" : "co/edu/prog3/ui/images/placeholder.png"
   } ]
 }

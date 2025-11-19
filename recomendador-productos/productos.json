@@ -1,0 +1,30 @@
+{
+  "products" : {
+    "p5" : {
+      "id" : "p5",
+      "name" : "Arroz",
+      "price" : 5000.0,
+      "category" : "alimento",
+      "brand" : "diana"
+    },
+    "p2" : {
+      "id" : "p2",
+      "name" : "pantalon",
+      "price" : 100000.0,
+      "category" : "ropa",
+      "brand" : "levi' s"
+    },
+    "p4" : {
+      "id" : "p4",
+      "name" : "camiseta",
+      "price" : 40000.0,
+      "category" : "ropa",
+      "brand" : "h&m"
+    }
+  },
+  "adjacency" : {
+    "p5" : [ ],
+    "p2" : [ ],
+    "p4" : [ ]
+  }
+}
