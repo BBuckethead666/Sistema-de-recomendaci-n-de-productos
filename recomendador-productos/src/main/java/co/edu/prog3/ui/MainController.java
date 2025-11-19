@@ -10,46 +10,78 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador principal de la aplicación. Se encarga de gestionar
+ * la navegación entre vistas, el cambio de idioma y la configuración
+ * inicial del escenario (Stage) principal.
+ */
 public class MainController {
 
+    /**
+     * Ventana principal de la aplicación.
+     */
     private Stage stage;
 
+    /**
+     * Asigna el escenario principal utilizado por la aplicación.
+     *
+     * @param stage instancia de la ventana principal
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    // ✅ Abrir tienda
+    /**
+     * Abre la vista de la tienda y la carga en la ventana principal.
+     */
     @FXML
     private void openStoreView() {
         loadView("/co/edu/prog3/ui/StoreView.fxml", "store.title");
     }
 
-    // ✅ Abrir administrador
+    /**
+     * Abre la vista del panel de administración.
+     */
     @FXML
     private void openAdminView() {
         loadView("/co/edu/prog3/ui/AdminView.fxml", "admin.title");
     }
 
-    // ✅ Cambiar idioma a español
+    /**
+     * Cambia el idioma de la aplicación a español (Colombia)
+     * y recarga la vista principal.
+     */
     @FXML
     private void setSpanish() {
         Locale.setDefault(new Locale("es", "CO"));
         reloadMainView();
     }
 
-    // ✅ Cambiar idioma a inglés
+    /**
+     * Cambia el idioma de la aplicación a inglés
+     * y recarga la vista principal.
+     */
     @FXML
     private void setEnglish() {
         Locale.setDefault(Locale.ENGLISH);
         reloadMainView();
     }
 
-    // ✅ Recargar vista principal con idioma actualizado
+    /**
+     * Recarga la vista principal para aplicar el idioma seleccionado.
+     */
     private void reloadMainView() {
         loadView("/co/edu/prog3/ui/MainView.fxml", "main.title");
     }
 
-    // ✅ Método central para cargar vistas
+    /**
+     * Carga una vista FXML, asigna su respectivo controlador,
+     * actualiza el contenido del Scene y mantiene el estado
+     * de la ventana (pantalla completa o maximizada).
+     *
+     * @param fxmlFile ruta del archivo FXML a cargar
+     * @param titleKey clave del título localizada mediante ResourceBundle
+     */
     private void loadView(String fxmlFile, String titleKey) {
         try {
             ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
@@ -69,7 +101,7 @@ public class MainController {
             boolean wasFullScreen = stage.isFullScreen();
             boolean wasMaximized = stage.isMaximized();
 
-            // 🔑 En vez de crear un Scene nuevo, reemplazamos el root
+            // 🔑 Reemplazar el root de la escena existente
             Scene scene = stage.getScene();
             if (scene == null) {
                 scene = new Scene(root);
@@ -80,7 +112,7 @@ public class MainController {
 
             stage.setTitle(bundle.getString(titleKey));
 
-            // 🔑 Restaurar estado
+            // 🔑 Restaurar estado previo
             stage.setFullScreen(wasFullScreen);
             stage.setMaximized(wasMaximized);
 

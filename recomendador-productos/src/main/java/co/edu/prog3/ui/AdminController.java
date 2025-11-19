@@ -18,20 +18,48 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador encargado de gestionar la vista de administración de productos.
+ * Permite agregar, actualizar, eliminar y visualizar productos registrados
+ * en el grafo de productos {@link ProductGraph}.
+ */
 public class AdminController {
 
+    /** Lista de productos visibles en la interfaz. */
     @FXML private ListView<String> productList;
+
+    /** Campo de texto para el nombre del producto. */
     @FXML private TextField nameField;
+
+    /** Campo de texto para el precio del producto. */
     @FXML private TextField priceField;
+
+    /** Campo de texto para la categoría del producto. */
     @FXML private TextField categoryField;
+
+    /** Campo de texto para la marca del producto. */
     @FXML private TextField brandField;
+
+    /** Campo de texto para la ruta de la imagen del producto. */
     @FXML private TextField imagePathField;
 
+    /** Estructura que almacena y gestiona los productos. */
     private ProductGraph graph;
+
+    /** Ventana principal donde se mostrarán las vistas. */
     private Stage stage;
 
+    /**
+     * Establece la ventana principal.
+     *
+     * @param stage ventana principal de la aplicación
+     */
     public void setStage(Stage stage) { this.stage = stage; }
 
+    /**
+     * Inicializa el controlador cargando los datos desde archivo JSON,
+     * creando el grafo si no existe e inicializando los eventos de selección.
+     */
     @FXML
     public void initialize() {
         try {
@@ -67,6 +95,9 @@ public class AdminController {
         });
     }
 
+    /**
+     * Actualiza la lista visual de productos con los datos del grafo.
+     */
     private void refreshList() {
         if (productList == null || graph == null) return;
         productList.getItems().clear();
@@ -79,6 +110,10 @@ public class AdminController {
         }
     }
 
+    /**
+     * Agrega un nuevo producto basado en los campos del formulario
+     * y lo guarda en el archivo JSON.
+     */
     @FXML
     private void addProduct() {
         try {
@@ -104,6 +139,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Actualiza los datos del producto seleccionado en la lista.
+     */
     @FXML
     private void updateProduct() {
         String selected = productList.getSelectionModel().getSelectedItem();
@@ -131,6 +169,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Elimina un producto seleccionado después de confirmar la acción con el usuario.
+     */
     @FXML
     private void deleteProduct() {
         String selected = productList.getSelectionModel().getSelectedItem();
@@ -158,6 +199,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Regresa a la vista principal restaurando el estado previo de pantalla.
+     */
     @FXML
     private void goBack() {
         try {
@@ -188,6 +232,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Limpia los campos del formulario y la selección de la lista.
+     */
     private void clearForm() {
         nameField.clear();
         priceField.clear();
@@ -197,6 +244,11 @@ public class AdminController {
         productList.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Muestra un mensaje informativo mediante un alert.
+     *
+     * @param key clave del mensaje a mostrar desde el archivo de recursos
+     */
     private void showInfo(String key) {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

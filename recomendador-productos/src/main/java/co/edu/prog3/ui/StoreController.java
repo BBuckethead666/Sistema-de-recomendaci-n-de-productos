@@ -28,18 +28,43 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador encargado de gestionar la vista de la tienda.
+ * Administra la carga del catálogo, la visualización de productos,
+ * el manejo del carrito de compras y la navegación hacia otras vistas.
+ */
 public class StoreController {
 
+    /** Contenedor en cuadrícula donde se muestran los productos del catálogo. */
     @FXML private GridPane catalogGrid;
+
+    /** Lista visual donde se presentan los productos añadidos al carrito. */
     @FXML private ListView<String> cartList;
+
+    /** Etiqueta que muestra el total acumulado del carrito. */
     @FXML private Label totalLabel;
 
+    /** Grafo que contiene los productos y sus relaciones de recomendación. */
     private ProductGraph graph;
+
+    /** Lista que almacena los productos agregados al carrito. */
     private List<Product> carrito;
+
+    /** Ventana principal usada para navegación. */
     private Stage stage;
 
+    /**
+     * Establece el Stage principal para permitir navegación entre vistas.
+     *
+     * @param stage ventana principal.
+     */
     public void setStage(Stage stage) { this.stage = stage; }
 
+    /**
+     * Inicializa el controlador.
+     * Carga los productos desde un archivo JSON, genera el catálogo visual
+     * y actualiza el total del carrito.
+     */
     @FXML
     public void initialize() {
         carrito = new ArrayList<>();
@@ -61,6 +86,10 @@ public class StoreController {
         updateTotal();
     }
 
+    /**
+     * Carga visualmente todos los productos en el catálogo,
+     * generando tarjetas individuales dentro del GridPane.
+     */
     private void loadCatalog() {
         catalogGrid.getChildren().clear();
         int col = 0, row = 0;
@@ -72,6 +101,14 @@ public class StoreController {
         }
     }
 
+    /**
+     * Crea una tarjeta visual (VBox) para mostrar la información de un producto,
+     * su imagen, precio y botones de acciones como agregar al carrito
+     * y ver recomendaciones relacionadas.
+     *
+     * @param product producto que será mostrado.
+     * @return un contenedor VBox con el diseño de la tarjeta.
+     */
     private VBox createProductCard(Product product) {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
 
@@ -138,6 +175,12 @@ public class StoreController {
         return box;
     }
 
+    /**
+     * Agrega un producto al carrito, actualiza la lista visual,
+     * recalcula el total y guarda el carrito en un archivo JSON.
+     *
+     * @param product producto a agregar.
+     */
     private void addToCart(Product product) {
         carrito.add(product);
         cartList.getItems().add(product.getName() + " - $" + product.getPrice());
@@ -150,6 +193,10 @@ public class StoreController {
         }
     }
 
+    /**
+     * Limpia el carrito con confirmación del usuario.
+     * Actualiza la vista y guarda el carrito vacío en JSON.
+     */
     @FXML
     private void clearCart() {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
@@ -179,12 +226,20 @@ public class StoreController {
         }
     }
 
+    /**
+     * Calcula el total del carrito y actualiza la etiqueta correspondiente.
+     */
     private void updateTotal() {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
         double total = carrito.stream().mapToDouble(Product::getPrice).sum();
         totalLabel.setText(bundle.getString("label.total") + ": $" + total);
     }
 
+    /**
+     * Muestra una ventana informativa con detalles del producto seleccionado.
+     *
+     * @param product producto a detallar.
+     */
     private void showProductDetails(Product product) {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -198,6 +253,9 @@ public class StoreController {
         alert.showAndWait();
     }
 
+    /**
+     * Finaliza la compra, muestra el total y limpia el carrito.
+     */
     @FXML
     private void checkout() {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
@@ -220,6 +278,9 @@ public class StoreController {
         }
     }
 
+    /**
+     * Regresa a la vista principal cargando nuevamente el MainView.fxml.
+     */
     @FXML
     private void goBack() {
         try {
@@ -250,7 +311,11 @@ public class StoreController {
         }
     }
 
-     /** 🔑 Método auxiliar para mostrar notificaciones internacionalizadas */
+    /**
+     * Muestra un mensaje informativo en una ventana emergente.
+     *
+     * @param message mensaje a mostrar.
+     */
     private void showInfo(String message) {
         ResourceBundle bundle = ResourceBundle.getBundle("co.edu.prog3.ui.messages", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
